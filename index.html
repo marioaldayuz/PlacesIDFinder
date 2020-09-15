@@ -3,28 +3,60 @@
   <head>
     <meta charset="utf-8">
     <title>Place ID Finder</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAwUKIXQ9IL_ZsGUNwmN1C25p9f313lCc&callback=initMap&libraries=places&v=weekly"
+
+
+     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+     <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPJpjD-qcR_yIxJnS8maR5W9KB0E3EzYI&callback=initMap&libraries=places&v=weekly"
       defer></script>
       <link rel="stylesheet" href="styles.css">
       <script src="index.js" charset="utf-8"></script>
+
   </head>
   <body>
-    <div style="display: none">
-      <input
-        id="pac-input"
-        class="controls"
-        type="text"
-        placeholder="Enter a location"
-      />
+    <div class="FirstDivID">
+      <form>
+
+
+        <br>
+        <!-- <input type="text" id = "place-address" name = "place-address" placeholder="Google Place ID:" > -->
+        Google Place ID:
+        <p id="demo"></p>
+        <br>
+
+        <!-- <input type="button"  onclick=" window.open('index.html','_blank')" value="Choose Location"> -->
+
+      </form>
+      <br>
+
     </div>
-    <div id="map"></div>
-    <div id="infowindow-content">
-      <span id="place-name" class="title"></span><br />
-      <strong>Place ID:</strong> <span id="place-id"></span><br />
-      <span id="place-address"></span>
-    </div>
+      <div style="display: none">
+        <input
+          id="pac-input"
+          class="controls"
+          type="text"
+          placeholder="Enter a location"
+        />
+      </div>
+      <div id="map"></div>
+      <div id="infowindow-content">
+        <span id="place-name" class="title"></span><br />
+        <strong>Place ID:</strong>  <span name = "place" id="place-id"></span><br />
+
+        <span id="place-address"></span>
+          <!-- <input type="button" value="Confirm Location"> -->
+          <br>
+          <button onclick="myFunction()">Confirm Location</button>
+      </div>
+
+      <script>
+        function myFunction() {
+          var x = document.getElementById("place-id").innerHTML;
+          document.getElementById("demo").innerHTML = x;
+        }
+</script>
 
   </body>
 </html>
+
+
