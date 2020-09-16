@@ -11,26 +11,31 @@
       defer></script>
       <link rel="stylesheet" href="styles.css">
       <script src="index.js" charset="utf-8"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   </head>
-  <body>
-    <div class="FirstDivID">
+ <body>
+    <div class="FirstDiv">
       <form>
 
-        
-        <!-- <input type="text" id = "place-address" name = "place-address" placeholder="Google Place ID:" > -->
-        <h3> Please enter your location in the map and click the button to confirm it </h3>
-        <br>
-        Google Place ID:
-        <span id="demo"></span>
+
         <br>
 
-        <!-- <input type="button"  onclick=" window.open('index.html','_blank')" value="Choose Location"> -->
+          Google Place ID:
+          <input type="text" id = "place-address" name = "place-address" placeholder="" >
+          <!-- <input type="button" value="Choose Location"> -->
+
+          <button id="btn1" onclick="displayMap()"> Choose location </button>
+          <!-- <button onclick="">Choose Location <button> -->
+        <br>
 
       </form>
       <br>
-
     </div>
+
+  <!-- //  <div class="SecondDiv" style="display:none;""> -->
+
+
       <div style="display: none">
         <input
           id="pac-input"
@@ -39,7 +44,7 @@
           placeholder="Enter a location"
         />
       </div>
-      <div id="map"></div>
+      <div id="map" ></div>
       <div id="infowindow-content">
         <span id="place-name" class="title"></span><br />
         <strong>Place ID:</strong>  <span name = "place" id="place-id"></span><br />
@@ -47,17 +52,40 @@
         <span id="place-address"></span>
           <!-- <input type="button" value="Confirm Location"> -->
           <br>
-          <button onclick="myFunction()">Confirm Location</button>
+          <button id="btn2" onclick="myFunction()">Confirm Location</button>
       </div>
+    <!-- </div> -->
+
+      <!-- function that fills the input form with place id when "Confirm Location" is clicked -->
 
       <script>
         function myFunction() {
           var x = document.getElementById("place-id").innerHTML;
-          document.getElementById("demo").innerHTML = x;
+          document.getElementById("place-address").innerHTML = x;
+          $("#place-address").val(x);
+      //    document.getElementById("SecondDiv").style.display="none";
         }
-</script>
+      </script>
+
+
+     <!-- <script>
+        //  $("#map").hide();
+      //     $(document).ready(function(){
+      //       $("#btn1").click(function() {
+      //         $("#map").show();
+      //       });
+      //     });
+      // </script> -->
+
+      <script>
+          $(document).ready(function(){
+            $("#btn2").click(function() {
+                $("#map").hide(400);
+            });
+          });
+      </script>
+
+
 
   </body>
 </html>
-
-
