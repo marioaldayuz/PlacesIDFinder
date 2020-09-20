@@ -5,11 +5,14 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+
+var map;
+var mapCenter = { lat: 49.246292,  lng: -123.116226};
 function initMap() {
+
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: {
-      lat: 49.246292,
-      lng: -123.116226},
+    center: mapCenter,
     zoom: 13
   });
   const input = document.getElementById("pac-input");
@@ -53,4 +56,10 @@ function initMap() {
       place.formatted_address;
     infowindow.open(map, marker);
   });
+}
+
+
+function showMap(){
+  document.getElementById("divMap").style.display = 'block'
+  google.maps.event.trigger(map, 'resize');
 }
