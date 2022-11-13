@@ -1,65 +1,51 @@
-// This sample uses the Place Autocomplete widget to allow the user to search
-// for and select a place. The sample then displays an info window containing
-// the place ID and other information about the place that the user has
-// selected.
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" href="https://storage.cloud.google.com/brmcomplete/places-id-finder/place-id.css">
+  <script src="https://storage.cloud.google.com/brmcomplete/places-id-finder/place-id.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <form>
+    <br>
+    Google Place ID:
+    <input type="text" id="place-address" name="place-address" placeholder="">
+  </form>
+
+  <div style="display: none;">
+    <input id="pac-input" class="controls" type="text" placeholder="Enter a location" />
+  </div>
+
+  <div style="display:none;" id="divMap">
+    <div id="map" style="width:800px; height:400px;"></div>
 
 
-var map;
-var mapCenter = { lat: 49.246292,  lng: -123.116226};
-function initMap() {
+    <div id="infowindow-content">
+      <span id="place-name" class="title"></span><br />
+      <strong>Place ID:</strong> <span name="place" id="place-id"></span><br />
 
-  const map = new google.maps.Map(document.getElementById("map"), {
-    center: mapCenter,
-    zoom: 13
-  });
-  const input = document.getElementById("pac-input");
-  const autocomplete = new google.maps.places.Autocomplete(input);
-  autocomplete.bindTo("bounds", map);
-  // Specify just the place data fields that you need.
-  autocomplete.setFields(["place_id", "geometry", "name"]);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  const infowindow = new google.maps.InfoWindow();
-  const infowindowContent = document.getElementById("infowindow-content");
-  infowindow.setContent(infowindowContent);
-  const marker = new google.maps.Marker({ map: map });
-  marker.addListener("click", () => {
-    infowindow.open(map, marker);
-  });
-  autocomplete.addListener("place_changed", () => {
-    infowindow.close();
-    const place = autocomplete.getPlace();
+      <span id="place-address"></span>
+      <!-- <input type="button" value="Confirm Location"> -->
+      <br>
+      <button id="btn2" onclick="myFunction()">Confirm Location</button>
+    </div>
+  </div>
+  <button onclick="showMap()"> Open Map </button>
+  <!-- </div> -->
 
-    if (!place.geometry) {
-      return;
+  <!-- function that fills the input form with place id when "Confirm Location" is clicked -->
+
+  <script>
+    function myFunction() {
+      var x = document.getElementById("place-id").innerHTML;
+      document.getElementById("place-address").innerHTML = x;
+      $("#place-address").val(x);
+      //    document.getElementById("SecondDiv").style.display="none";
     }
+  </script>
 
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);
-    }
-    // Set the position of the marker using the place ID and location.
-
-    marker.setPlace({
-      placeId: place.place_id,
-      location: place.geometry.location
+  <script>
+    $(document).ready(function() {
+      $("#btn2").click(function() {
+        $("#map").hide();
+      });
     });
-    marker.setVisible(true);
-    infowindowContent.children.namedItem("place-name").textContent = place.name;
-    infowindowContent.children.namedItem("place-id").textContent =
-      place.place_id;
-    infowindowContent.children.namedItem("place-address").textContent =
-      place.formatted_address;
-    infowindow.open(map, marker);
-  });
-}
+  </script>
 
-
-function showMap(){
-  document.getElementById("divMap").style.display = 'block'
-  google.maps.event.trigger(map, 'resize');
-}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZ58Rt3lPdSmxJQirtzZ-Ue2sCmIYAkIs&callback=initMap&libraries=places&v=weekly" defer></script>
